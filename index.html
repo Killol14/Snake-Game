@@ -4,37 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake-Game</title>
+    <title>Snake Game</title>
 
-    <!-- Bootstrap link-->
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" type="text/css" />
-
-    <!-- Google-fonts link-->
-
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@100,200,300,400,500,600,700&display=swap" rel="stylesheet">
-    
-    <!-- CSS link-->
-
-    <link rel = "stylesheet" href="game/css/style.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 
 </head>
 <body>
-    <div class ="container">
-        <div id ="overlook">
-            Your Final Score: <span id = "final-score"></span>
-            <br>
-            <button type="button" class="btn btn-danger">Click To Play Again</button>
-        </div>
-        <canvas id ="canvas" width="600" height="450">Sorry this browser does not support Canvas element</canvas>
-        <div id="status">
-            <div id ="score"></div>
-            <div id ="high-score"></div>
-            <button type ="button" class="btn btn-warning">Reset High Score</button>
-        </div>
-
-      
+    
+    <div class="container">
+        <h1>Snake Game</h1>
+        <div class = "game-board"></div>
+        <h2 class = "score">Score: <spam>0</spam></h2>
     </div>
-    <script src="game/js/script.js"></script>
+        
+        
+
+
+
+    <!--Linking normal Jquery to google cdn, google cdn address in source attribute-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+   
+     <!--Main Js-->
+     <script src="js/script.js"></script>
 </body>
 </html>

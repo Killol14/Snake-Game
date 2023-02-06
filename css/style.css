@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    padding: 0; 
+}
+
+h1 {
+    text-align: center;
+    color: orangered;
+    font-size: 3.2rem;
+}
+
+.container {
+    height: 100vh;
+    width: 100%;
+    background-color:black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.game-board {
+    height: 90vmin;
+    width: 90vmin;
+    border-radius: 1ch;
+    display: grid;
+    grid-template-columns: repeat(21, 1fr);
+    grid-template-rows: repeat(21, 1fr);
+    background : linear-gradient(orange,green);
+
+}
+
+.score {
+    background: yellowgreen;
+    padding: 10px;
+    border-radius: 2ch;
+}
+
+/* Creating Sanke CSS */
+
+.snake {
+    background-color: red;
+    border: 2px solid black;
+}
+
+.head {
+    background: url(/snake.png);
+    background-size: 100% 100%;
+}
+
+.food {
+    background: url(/frog.png);
+    background-size: 100% 100%;
+}
+
+
