@@ -1,11 +1,11 @@
 let lastPaintTime = 0;
-const SNAKE_SPEED = 1;
+let SNAKE_SPEED = 2;
 let inputDirection = {X : 0, Y : 0}
 let lastInputDirection = inputDirection;
-var score = 0;
-let food = {x : 11, y : 11}
-const EXPENTION_AMOUNT = 1;
 
+
+const EXPENTION_AMOUNT = 1;
+var score = 0;
 const snakeBody = [
     {X : 7, Y : 8},
     //{X : 8, Y : 8},
@@ -14,8 +14,9 @@ const snakeBody = [
     //{X : 11, Y : 8},
 ];
 
+let food = getFoodRandomPosition();
 const gameBoard = document.querySelector(".game-board");
-const scoreBox = document.getElementById("#score");
+const scoreBox = document.getElementById("score");
 
 function paint(currentTime){
     let TimeSeconds = (currentTime - lastPaintTime) / 1000;
@@ -123,9 +124,11 @@ function getInputDirection(){
 function snakeEatFood() {
 
     if(isEat()){
+        score += 10;
         scoreBox.innerHTML = score +=10;
         food = getFoodRandomPosition();
         expendSnake();
+        SNAKE_SPEED ++;
     }
 }
 function isEat(){ 
