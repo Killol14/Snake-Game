@@ -1,5 +1,5 @@
-let lastPaintTime = 0;
-let SNAKE_SPEED = 2;
+var lastPaintTime = 0;
+let SNAKE_SPEED = 0;
 let inputDirection = {x : 0, y : 0}
 let lastInputDirection = inputDirection;
 
@@ -10,7 +10,7 @@ const snakeBody = [
     {x : 7, y : 8},
     //{x : 8, y : 8},
     //{x : 9, y : 8},
-   //{x : 10, y : 8},
+    //{x : 10, y : 8},
     //{x : 11, y : 8},
 ];
 
@@ -19,7 +19,7 @@ const gameBoard = document.querySelector(".game-board");
 const scoreBox = document.getElementById("score");
 
 function paint(currentTime){
-    let TimeSeconds = (currentTime - lastPaintTime) / 1000;
+    var TimeSeconds = (currentTime - lastPaintTime) / 1000;
     requestAnimationFrame(paint);
     if ( TimeSeconds< 1 / SNAKE_SPEED ) return;
     lastPaintTime = currentTime;
@@ -73,11 +73,11 @@ function drawSnake() {
 }
 
 function drawFood(){
-var foodElement = document.createElement("div");
-    foodElement.style.gridColumnStart = food.x;
-    foodElement.style.gridRowStart = food.y;
-    foodElement.classList.add("food");
-    gameBoard.appendChild(foodElement);
+    var foodElement = document.createElement("div");
+        foodElement.style.gridColumnStart = food.x;
+        foodElement.style.gridRowStart = food.y;
+        foodElement.classList.add("food");
+         gameBoard.appendChild(foodElement);
 
 }
 
@@ -90,7 +90,7 @@ function snakeMove() {
 
     snakeBody[0].x += inputDirection.x;
     snakeBody[0].y += inputDirection.y;
-    checkGameOve();
+    checkGameOver();
 }
 
 function getInputDirection(){
@@ -118,7 +118,7 @@ function getInputDirection(){
 
     });
     lastInputDirection = inputDirection;
-    return inputDirection;
+        return inputDirection;
 }
 
 function snakeEatFood() {
