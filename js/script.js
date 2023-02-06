@@ -2,7 +2,7 @@ let lastPaintTime = 0;
 const SNAKE_SPEED = 1;
 let inputDirection = {X : 0, Y : 0}
 let lastInputDirection = inputDirection;
-
+var score = 0;
 let food = {x : 11, y : 11}
 const EXPENTION_AMOUNT = 1;
 
@@ -15,6 +15,7 @@ const snakeBody = [
 ];
 
 const gameBoard = document.querySelector(".game-board");
+const scoreBox = document.getElementById("#score");
 
 function paint(currentTime){
     let TimeSeconds = (currentTime - lastPaintTime) / 1000;
@@ -88,7 +89,7 @@ function snakeMove() {
 
     snakeBody[0].X += inputDirection.X;
     snakeBody[0].Y += inputDirection.Y;
-    
+    checkGameOve();
 }
 
 function getInputDirection(){
@@ -122,21 +123,52 @@ function getInputDirection(){
 function snakeEatFood() {
 
     if(isEat()){
+        scoreBox.innerHTML = score +=10;
         food = getFoodRandomPosition();
         expendSnake();
     }
 }
 function isEat(){ 
-        return snakeBody[0] === food.x && snakeBody[0].Y === food.Y;
+        return snakeBody[0] === food.X && snakeBody[0].Y === food.Y;
          
 }
 function getFoodRandomPosition() {
-    // Math code from javascript W3Scool //
-    return { X : Math.ceil(Math.random()*22),
-        Y : Math.ceil(Math.random()*22)};
+    let a,b, myCondition = true;
+    while(myCondition){
+
+        // Math code from javascript W3Scool //
+         a = Math.ceil(Math.random()*22);
+         b = Math.ceil(Math.random()*22);
+
+        myCondition = snakeBody.some(segment => {
+            return segment.X === a && segment.Y === b;
+        })
+    }
+    
+    return { X : a ,
+        Y : b};
 }
 function expendSnake(){
     for(i=0; i<EXPENTION_AMOUNT; i++){
         snakeBody.push(snakeBody[snakeBody.length-1]);
     }
+}
+function checkGameOve(){
+    if(snakeOutOfGrid() || snakeIntersection() ){
+        location.reload();
+        alert("Game Over : You Loose");
+    }
+}
+
+function snakeOutOfGrid(){
+    return snakeBody[0].X > 0 || snakeBody[0].X > 22 || snakeBody[0].Y < 0 || snakeBody[0].Y > 22;
+
+}
+function snakeIntersection(){
+    for(i=1; i,snakeBody.length; i++){
+        if(snakeBody[0].x === snakeBody[i].X && snakeBody[0].Y === snakeBody[i].Y){
+            return true;
+        }
+    }
+
 }
