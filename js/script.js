@@ -3,6 +3,11 @@ var lastPaintTime = 0;
 let SNAKE_SPEED = 2;
 let inputDirection = { x : 0, y : 0}
 let lastInputDirection = inputDirection;
+let left = document.querySelector(".left");
+let bottom = document.querySelector(".bottom");
+let right = document.querySelector(".right");
+let up = document.querySelector(".up");
+
 let gameOver = false;
 
 
@@ -163,6 +168,20 @@ function expendSnake(){
     for(i=0; i<EXPENTION_AMOUNT; i++){
         snakeBody.push(snakeBody[snakeBody.length-1]);
     }
+}
+//buttons function
+up.addEventListener("click", () => (direction = -width));
+bottom.addEventListener("click", () => (direction = +width));
+left.addEventListener("click", () => (direction = -1));
+right.addEventListener("click", () => (direction = 1));
+
+function replay(){
+    grid.innerHTML = "";
+    score = 0;
+    creatBoard();
+    startGame();
+    popup.style.display
+
 }
 
 function checkGameOver(){

@@ -1,3 +1,6 @@
+*{
+    box-sizing: border-box;
+}
 body {
     margin: 0;
     padding: 0; 
@@ -37,7 +40,7 @@ h1 {
     border-radius: 2ch;
 }
 
-.top {
+.up {
     width: 120px;
     background: yellowgreen;
     padding: 10px;
@@ -76,7 +79,7 @@ h1 {
 .restart:hover{
     background: yellowgreen;
 }
-.top:hover{
+.up:hover{
     background: red;
 }
 .right:hover{
@@ -93,26 +96,33 @@ h1 {
 
 .snake {
     background-color: red;
-    border: 2px solid black;
+    border: 1px solid black;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
+    border-radius: 4ch;
+    
 }
 
 .head {
-    background: url(/snake.png);
+    background: rebeccapurple;
     background-size: 100% 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     z-index: 22;
+    border-bottom:  10px solid black;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+   
 }
 
 .food {
-    background: url(/frog.png);
+    background:red;
     background-size: 100% 100%;
+    border-radius: 100%;
 }
 
 
