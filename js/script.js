@@ -3,6 +3,9 @@ var lastPaintTime = 0;
 let SNAKE_SPEED = 2;
 let inputDirection = { x : 0, y : 0}
 let lastInputDirection = inputDirection;
+// buttons
+let direction = { x : 0, y : 0}
+let lastDirection = direction;
 let left = document.querySelector(".left");
 let bottom = document.querySelector(".bottom");
 let right = document.querySelector(".right");
@@ -14,10 +17,8 @@ let gameOver = false;
 const EXPENTION_AMOUNT = 1;
 var score = 0;
 const snakeBody = [
-    {x : 8, y : 8},
+    {x : 12, y : 12},
     
-    
-
 ];
 let food = getFoodrandomPosition();
 const gameBoard = document.querySelector(".game-board");
@@ -58,7 +59,6 @@ function drawSnake(){
         var snakeElement = document.createElement("div");
         snakeElement.style.gridColumnStart = segment.x;
         snakeElement.style.gridRowStart = segment.y;
-        // snakeElement.innerHTML = index;
         snakeElement.style.transform = "rotate(0deg)";
         if(index == 0){
             snakeElement.classList.add("head");
@@ -101,24 +101,25 @@ function snakeMove(){
     checkGameOver();
 }
 
+// Switch Code from YouTube 
 
 function getInputDirection(){
     window.addEventListener("keydown", e=>{
         
         switch(e.key){
-            case 'ArrowUp' : 
+            case "ArrowUp" : 
             if(lastInputDirection.y == 1) break;
             inputDirection = {x : 0, y : -1}
             break;
-            case 'ArrowDown' : 
+            case "ArrowDown" : 
             if(lastInputDirection.y == -1) break;
             inputDirection = {x : 0, y : 1}
             break;
-            case 'ArrowLeft' : 
+            case "ArrowLeft" : 
             if(lastInputDirection.x == 1) break;
             inputDirection = {x : -1, y : 0}
             break;
-            case 'ArrowRight' : 
+            case "ArrowRight" : 
             if(lastInputDirection.x == -1) break;
             inputDirection = {x : 1, y : 0}
             break;
@@ -154,8 +155,8 @@ function getFoodrandomPosition(){
 
     let a,b, myCondition = true;
     while(myCondition){
-        a = Math.ceil(Math.random()*16);
-        b = Math.ceil(Math.random()*16);
+        a = Math.ceil(Math.random()*20);
+        b = Math.ceil(Math.random()*20);
 
         myCondition = snakeBody.some(segment=>{
              return segment.x === a && segment.y === b;
@@ -169,11 +170,6 @@ function expendSnake(){
         snakeBody.push(snakeBody[snakeBody.length-1]);
     }
 }
-//buttons function
-up.addEventListener("click", () => (direction = -width));
-bottom.addEventListener("click", () => (direction = +width));
-left.addEventListener("click", () => (direction = -1));
-right.addEventListener("click", () => (direction = 1));
 
 function replay(){
     grid.innerHTML = "";
@@ -194,7 +190,7 @@ function checkGameOver(){
 }
 
 function snakeOutOfGrid(){
-    return snakeBody[0].x < 0 || snakeBody[0].x > 16 || snakeBody[0].y < 0 || snakeBody[0].y > 16;
+    return snakeBody[0].x < 0 || snakeBody[0].x > 20 || snakeBody[0].y < 0 || snakeBody[0].y > 20;
 }
 
 function snakeIntersection(){
@@ -204,3 +200,34 @@ function snakeIntersection(){
         }
     }  
 }
+
+
+function getDirection(){
+    window.addEventListener("click", e=>{
+        
+        switch(e.key){
+            case "up" : 
+            if(lastDirection.y == 1) break;
+            direction = {x : 0, y : -1}
+            break;
+            case "down" : 
+            if(lastDirection.y == -1) break;
+            direction = {x : 0, y : 1}
+            break;
+            case "left" : 
+            if(lastDirection.x == 1) break;
+            direction = {x : -1, y : 0}
+            break;
+            case "right" : 
+            if(lastDirection.x == -1) break;
+            direction = {x : 1, y : 0}
+            break;
+            default : direction = { x : 0, y : 0}
+        }
+       
+    })
+    
+let lastDirection = direction;
+return direction;
+}
+
