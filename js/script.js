@@ -1,15 +1,8 @@
 
 var lastPaintTime = 0;
-let SNAKE_SPEED = 2;
+let SNAKE_SPEED = 3;
 let inputDirection = { x : 0, y : 0}
 let lastInputDirection = inputDirection;
-// buttons
-let direction = { x : 0, y : 0}
-let lastDirection = direction;
-let left = document.querySelector(".left");
-let bottom = document.querySelector(".bottom");
-let right = document.querySelector(".right");
-let up = document.querySelector(".up");
 
 let gameOver = false;
 
@@ -53,6 +46,7 @@ function update(){
     snakeEatFood();
 }
 
+// Draw Sanke
 
 function drawSnake(){
     snakeBody.forEach((segment, index)=>{
@@ -82,6 +76,8 @@ function drawSnake(){
     });
 }
 
+// Draw Food
+
 function drawFood(){
     var foodElement = document.createElement("div");
     foodElement.style.gridColumnStart = food.x;
@@ -89,6 +85,8 @@ function drawFood(){
     foodElement.classList.add("food");
     gameBoard.appendChild(foodElement);
 }
+
+// Sanke Move
 
 function snakeMove(){
     inputDirection = getInputDirection();
@@ -132,6 +130,8 @@ function getInputDirection(){
 }
 
 
+// Sanke EatFood score
+
 function snakeEatFood(){
 
     if(isEat()){
@@ -151,6 +151,8 @@ function isEat(){
     
 }
 
+// Sanke FOod RandomPosition
+
 function getFoodrandomPosition(){
 
     let a,b, myCondition = true;
@@ -165,20 +167,15 @@ function getFoodrandomPosition(){
     return {x : a, y : b};
 }
 
+// Sanke Expands after Eating food
+
 function expendSnake(){
     for(i=0; i<EXPENTION_AMOUNT; i++){
         snakeBody.push(snakeBody[snakeBody.length-1]);
     }
 }
 
-function replay(){
-    grid.innerHTML = "";
-    score = 0;
-    creatBoard();
-    startGame();
-    popup.style.display
-
-}
+// Game Over
 
 function checkGameOver(){
     if(snakeOutOfGrid() || snakeIntersection()){
@@ -201,33 +198,4 @@ function snakeIntersection(){
     }  
 }
 
-
-function getDirection(){
-    window.addEventListener("click", e=>{
-        
-        switch(e.key){
-            case "up" : 
-            if(lastDirection.y == 1) break;
-            direction = {x : 0, y : -1}
-            break;
-            case "down" : 
-            if(lastDirection.y == -1) break;
-            direction = {x : 0, y : 1}
-            break;
-            case "left" : 
-            if(lastDirection.x == 1) break;
-            direction = {x : -1, y : 0}
-            break;
-            case "right" : 
-            if(lastDirection.x == -1) break;
-            direction = {x : 1, y : 0}
-            break;
-            default : direction = { x : 0, y : 0}
-        }
-       
-    })
-    
-let lastDirection = direction;
-return direction;
-}
 
