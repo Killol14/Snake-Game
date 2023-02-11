@@ -1,201 +1,129 @@
+let grid = document.querySelector(".grid");
+let popup = document.querySelector(".popup")
+let playAgain = document.querySelector(".playAgain")
+let scoreDisplay = document.querySelector(".scoreDisplay")
+let left = document.querySelector(".left");
+let bottom = document.querySelector(".bottom");
+let right = document.querySelector(".right");
+let up = document.querySelector(".up");
+let width = 20;
+let currentIndex = 0;
+let appleIndex = 0;
+let currentSnake =[2, 1, 0];
+let score= 0;
+let direction = 1;
+let speed = 0.8;
+let intervalTime = 0;
 
-var lastPaintTime = 0;
-let SNAKE_SPEED = 3;
-let inputDirection = { x : 0, y : 0}
-let lastInputDirection = inputDirection;
-
-let gameOver = false;
+//DOMContentLoad
 
 
-const EXPENTION_AMOUNT = 1;
-var score = 0;
-const snakeBody = [
-    {x : 12, y : 12},
-    
-];
-let food = getFoodrandomPosition();
-const gameBoard = document.querySelector(".game-board");
-const scoreBox = document.getElementById("score");
-function paint(currentTime){
-   var TimeSeconds = (currentTime - lastPaintTime) / 1000;
-   requestAnimationFrame(paint);
-   if( TimeSeconds < 1 / SNAKE_SPEED) return;
-   lastPaintTime = currentTime;
-    
-   if(gameOver!=true){
+document.addEventListener("DOMContentLoaded" , function () {
+    document.addEventListener("keydown", control);
+    createboard();
+    startGame();
+    playAgain.addEventListener("click", replay);
+});
 
-       update();
-       draw();
+function createBoard() {
+    popup.style.display = "none";
+    for(let i = 0; i > 225; i++) {
+        let div = document.createElement("div");
+        grid.appendChild(div);
+
+    }
+}
+function startGame(){
+    let squares = document.querySelectorAll(".grid div");
+    randomApple(squares);
+    direction = 1;
+    scoreDisplay.innerHTML = score;
+    intervalTime = 1000;
+    currentSnake = [2, 1, 0];
+    currentIndex = 0;
+    currentSnake.forEach((index) => squares[index].classList.add("snake"));
+    interval = setInterval(moveOutcome, intervalTime);
+}
+
+function moveOutcome(){
+    let squares = document.querySelectorAll(".grid div")
+    if(checkForHits(squares)){
+        alert("Game Over!");
+        popup.style.display = "flex";
+        return clearInterval(interval);
+    }else{
+        moveSnake(squares);
+    }
+}
+
+function moveSnake(squares){
+    let tail = currentSnake.pop();
+    squares[tail].classList.remove("snake");
+    currentSnake.unshift(currentSnake[0] + direction);
+    eatApple(squares, tail);
+    squares[currentSnake[0]].classList.add("snake");
+}
+function cheakForHits(squares){
+    if(
+        (currentSnake[0] + width >=width * width && direction === width)||
+        (currentSnake[0] + width === width -1  && direction === 1)||
+        (currentSnake[0] + width === 0 && direction === -1)||
+        (currentSnake[0] + width <= 0 && direction === -width)||
+        squares[currentSnake[0] + direction].classList.contains("snake")
+    ){
+        return true;
+    }else{
+        return false;
+        }
+}
+
+function eatApple(squares, tail){
+    if(squares[currentSnake[0]].classList("apple")){
+        squares[currentSnake[0]].classList.remove("apple");
+        squares[tail].classList.add("snake");
+        currentSnake.push(tail);
+        randomAplle(squares);
+        score++;
+        scoreDisplay.textContent = score;
+        clearInterval(interval);
+        intervalTime = intervalTime * speed;
+        interval = setInterval(moveOutcome, intervalTime);
+    }
+}
+function tandomApple(squares){
+    do{
+        appleIndex = math.floor(math.random() * squares.length);
+    }while(squares[aplleIndex].classList.contains("snake"));
+    squares[aplleIndex].classList.add("apple");
+}
+
+//buttons function
+
+function control(e) {
+    if(e.keyCode === 39){
+        direction = 1;
+    }else if(e.keyCode ===38){
+        directon = -width;
+    }else if(e.keyCode === 37){
+        direction = -1;
+    }else if(e.keyCode === 40){
+        directon = width;
     }
 
 }
 
-window.requestAnimationFrame(paint);
+up.addEventListener("click", () => (directon = -width));
+bottom.addEventListener("click", () => (directon = +width));
+left.addEventListener("click", () => (directon = -1));
+right.addEventListener("click", () => (directon = 1));
 
-
-
-function draw(){
-    drawSnake();
-    drawFood();
-}
-
-function update(){
-    
+function replay(){
+     
     gameBoard.innerHTML = "";
+    score = 0;
     snakeMove();
-    snakeEatFood();
-}
-
-// Draw Sanke
-
-function drawSnake(){
-    snakeBody.forEach((segment, index)=>{
-        var snakeElement = document.createElement("div");
-        snakeElement.style.gridColumnStart = segment.x;
-        snakeElement.style.gridRowStart = segment.y;
-        snakeElement.style.transform = "rotate(0deg)";
-        if(index == 0){
-            snakeElement.classList.add("head");
-
-            if(inputDirection.x == 1){
-                snakeElement.style.transform = "rotate(-90deg)";
-            }else if(inputDirection.x == -1){
-                snakeElement.style.transform = "rotate(90deg)";
-            }
-            else if(inputDirection.y == -1){
-                snakeElement.style.transform = "rotate(180deg)";
-            }
-            else if(inputDirection.y == 1){
-                snakeElement.style.transform = "rotate(0deg)";
-            }
-        }else{
-            snakeElement.classList.add("snake");
-        }
-        gameBoard.appendChild(snakeElement);
-
-    });
-}
-
-// Draw Food
-
-function drawFood(){
-    var foodElement = document.createElement("div");
-    foodElement.style.gridColumnStart = food.x;
-    foodElement.style.gridRowStart = food.y;
-    foodElement.classList.add("food");
-    gameBoard.appendChild(foodElement);
-}
-
-// Sanke Move
-
-function snakeMove(){
-    inputDirection = getInputDirection();
-
-    for(i = snakeBody.length - 2; i >= 0; i--){
-        snakeBody[i+1] = {...snakeBody[i]}
-    }
-    snakeBody[0].x += inputDirection.x;
-    snakeBody[0].y += inputDirection.y;
-    checkGameOver();
-}
-
-// Switch Code from YouTube 
-
-function getInputDirection(){
-    window.addEventListener("keydown", e=>{
-        
-        switch(e.key){
-            case "ArrowUp" : 
-            if(lastInputDirection.y == 1) break;
-            inputDirection = {x : 0, y : -1}
-            break;
-            case "ArrowDown" : 
-            if(lastInputDirection.y == -1) break;
-            inputDirection = {x : 0, y : 1}
-            break;
-            case "ArrowLeft" : 
-            if(lastInputDirection.x == 1) break;
-            inputDirection = {x : -1, y : 0}
-            break;
-            case "ArrowRight" : 
-            if(lastInputDirection.x == -1) break;
-            inputDirection = {x : 1, y : 0}
-            break;
-            default : inputDirection = { x : 0, y : 0}
-        }
-       
-    })
-    lastInputDirection = inputDirection;
-    return inputDirection;
-}
-
-
-// Sanke EatFood score
-
-function snakeEatFood(){
-
-    if(isEat()){
-        score += 10;
-        scoreBox.innerHTML = score;
-        console.log("eated")
-        food = getFoodrandomPosition();
-        SNAKE_SPEED++;
-        expendSnake();
-    }
+    popup.style.display ="none";
     
+
 }
-
-function isEat(){
-     return snakeBody[0].x === food.x && snakeBody[0].y === food.y;
-        
-    
-}
-
-// Sanke FOod RandomPosition
-
-function getFoodrandomPosition(){
-
-    let a,b, myCondition = true;
-    while(myCondition){
-        a = Math.ceil(Math.random()*20);
-        b = Math.ceil(Math.random()*20);
-
-        myCondition = snakeBody.some(segment=>{
-             return segment.x === a && segment.y === b;
-        })
-    }
-    return {x : a, y : b};
-}
-
-// Sanke Expands after Eating food
-
-function expendSnake(){
-    for(i=0; i<EXPENTION_AMOUNT; i++){
-        snakeBody.push(snakeBody[snakeBody.length-1]);
-    }
-}
-
-// Game Over
-
-function checkGameOver(){
-    if(snakeOutOfGrid() || snakeIntersection()){
-        alert("Game Over : You Loose");
-        gameOver = true;
-        location.reload();
-       
-    }
-}
-
-function snakeOutOfGrid(){
-    return snakeBody[0].x < 0 || snakeBody[0].x > 20 || snakeBody[0].y < 0 || snakeBody[0].y > 20;
-}
-
-function snakeIntersection(){
-    for(i=1; i<snakeBody.length; i++){
-        if(snakeBody[0].x === snakeBody[i].x && snakeBody[0].y === snakeBody[i].y){
-            return true;
-        }
-    }  
-}
-
 

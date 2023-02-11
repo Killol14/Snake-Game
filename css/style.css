@@ -4,10 +4,14 @@
 body {
     margin: 0px;
     padding: 0px; 
+    background-size: cover;
+    height: 100vh;
 }
 #classic{
     height :100vh;
-   background-color: black;
+    background-color: black;
+    background-image: url(images/snakebody.png);
+    
 
 }
 nav{
@@ -94,7 +98,7 @@ transition: 0.2s;
 }
 
 
-/* game.html */
+/* snake.html */
 
 h1 {
     text-align: center;
@@ -135,22 +139,64 @@ h3 {
     flex-direction: column;
 
 }
+.content{
+    width: 500px;
+    height: 500px;
+    display:flex;
+    justify-content: space-between;
+    align-self: center;
+}
 
-.game-board {
-    height: 90vmin;
-    width: 90vmin;
+
+.grid{
+    height: 500px;
+    width: 500px;
     border-radius: 1ch;
-    display: grid;
+    box-shadow: orange;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
     grid-template-columns: repeat(22, 1fr);
     grid-template-rows: repeat(22, 1fr);
     background : linear-gradient(orange,green);
 
 }
-
+.game-board div{
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+}
+.secondary{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+div .secondary{
+    align-items: center;
+}
 .score {
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: yellowgreen;
-    padding: 10px;
+    padding: 0;
     border-radius: 2ch;
+}
+.score h2{
+    color: orangered;
+    font-size: 36px;
+}
+.score .scoreDisplay{
+    color: orange;
+    font-size: 30px;
+    margin-right: 30px;
+    padding-top: 5px;
+    padding-right: 10px;
+}
+div.button{
+    margin-top: 10px;
 }
 
 .up {
@@ -182,15 +228,16 @@ h3 {
     border-radius: 2ch;
     margin-left: 60px;
     cursor: pointer;
+    
 }
-.restart{
+.playAgain{
     margin-top: 15px;
     background: red;
     padding: 10px;
     border-radius: 2ch;
     margin-bottom: 10px;
 }
-.restart:hover{
+.playAgain:hover{
     background: yellowgreen;
 }
 .up:hover{
