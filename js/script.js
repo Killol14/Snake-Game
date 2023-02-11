@@ -6,7 +6,7 @@ let left = document.querySelector(".left");
 let bottom = document.querySelector(".bottom");
 let right = document.querySelector(".right");
 let up = document.querySelector(".up");
-let width = 20;
+let width = 15;
 let currentIndex = 0;
 let appleIndex = 0;
 let currentSnake =[2, 1, 0];
@@ -14,13 +14,14 @@ let score= 0;
 let direction = 1;
 let speed = 0.8;
 let intervalTime = 0;
+let interval = 0;
 
 //DOMContentLoad
 
 
 document.addEventListener("DOMContentLoaded" , function () {
     document.addEventListener("keydown", control);
-    createboard();
+    createBoard();
     startGame();
     playAgain.addEventListener("click", replay);
 });
@@ -63,9 +64,9 @@ function moveSnake(squares){
     eatApple(squares, tail);
     squares[currentSnake[0]].classList.add("snake");
 }
-function cheakForHits(squares){
+function checkForHits(squares){
     if(
-        (currentSnake[0] + width >=width * width && direction === width)||
+        (currentSnake[0] + width >= width * width && direction === width)||
         (currentSnake[0] + width === width -1  && direction === 1)||
         (currentSnake[0] + width === 0 && direction === -1)||
         (currentSnake[0] + width <= 0 && direction === -width)||
@@ -78,11 +79,11 @@ function cheakForHits(squares){
 }
 
 function eatApple(squares, tail){
-    if(squares[currentSnake[0]].classList("apple")){
+    if(squares[currentSnake[0]].classList.contains("apple")){
         squares[currentSnake[0]].classList.remove("apple");
         squares[tail].classList.add("snake");
         currentSnake.push(tail);
-        randomAplle(squares);
+        randomApple(squares);
         score++;
         scoreDisplay.textContent = score;
         clearInterval(interval);
@@ -90,11 +91,11 @@ function eatApple(squares, tail){
         interval = setInterval(moveOutcome, intervalTime);
     }
 }
-function tandomApple(squares){
+function randomApple(squares){
     do{
-        appleIndex = math.floor(math.random() * squares.length);
-    }while(squares[aplleIndex].classList.contains("snake"));
-    squares[aplleIndex].classList.add("apple");
+        appleIndex = Math.floor(Math.random() * squares.length);
+    }while(squares[appleIndex].classList.contains("snake"));
+    squares[appleIndex].classList.add("apple");
 }
 
 //buttons function
@@ -103,11 +104,11 @@ function control(e) {
     if(e.keyCode === 39){
         direction = 1;
     }else if(e.keyCode ===38){
-        directon = -width;
+        direction = -width;
     }else if(e.keyCode === 37){
         direction = -1;
     }else if(e.keyCode === 40){
-        directon = width;
+        direction = width;
     }
 
 }
@@ -119,9 +120,10 @@ right.addEventListener("click", () => (directon = 1));
 
 function replay(){
      
-    gameBoard.innerHTML = "";
+    grid.innerHTML = "";
     score = 0;
-    snakeMove();
+    createBoard();
+    startGame();
     popup.style.display ="none";
     
 

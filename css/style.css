@@ -183,6 +183,10 @@ div .secondary{
     background: yellowgreen;
     padding: 0;
     border-radius: 2ch;
+
+}
+div.score{
+    margin-bottom: 10px;
 }
 .score h2{
     color: orangered;
@@ -196,7 +200,7 @@ div .secondary{
     padding-right: 10px;
 }
 div.button{
-    margin-top: 10px;
+    margin-top: 50px;
 }
 
 .up {
@@ -258,12 +262,6 @@ div.button{
 .snake {
     background-color: red;
     border: 1px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    border-radius: 4ch;
-    
 }
 
 .head {
@@ -280,7 +278,7 @@ div.button{
    
 }
 
-.food {
+.apple {
     background:red;
     background-size: 100% 100%;
     border-radius: 100%;
