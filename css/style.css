@@ -149,22 +149,19 @@ h3 {
 
 
 .grid{
-    height: 500px;
-    width: 500px;
-    border-radius: 1ch;
-    box-shadow: orange;
+    height: 600px;
+    width: 400px;
+    border-radius: 20px;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     grid-template-columns: repeat(22, 1fr);
     grid-template-rows: repeat(22, 1fr);
     background : linear-gradient(orange,green);
-
 }
-.game-board div{
-    width: 20px;
+.grid div{
     height: 20px;
-    box-sizing: border-box;
+    width: 20px;
 }
 .secondary{
     display: flex;
@@ -260,29 +257,15 @@ div.button{
 /* Creating Sanke CSS */
 
 .snake {
-    background-color: red;
+    background-color: peru;
     border: 1px solid black;
 }
 
-.head {
-    background: rebeccapurple;
-    background-size: 100% 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    z-index: 22;
-    border-bottom:  10px solid black;
-    border-radius: 100%;
-
-   
-}
 
 .apple {
     background:red;
-    background-size: 100% 100%;
     border-radius: 100%;
-    z-index: 55;
+
 }
 
 
