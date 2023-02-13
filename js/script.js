@@ -1,4 +1,3 @@
-// A very basic snake game code.
 let grid = document.querySelector(".grid");
 let popup = document.querySelector(".popup");
 let playAgain = document.querySelector(".playAgain");
@@ -7,13 +6,14 @@ let left = document.querySelector(".left");
 let bottom = document.querySelector(".bottom");
 let right = document.querySelector(".right");
 let up = document.querySelector(".top");
+let gameOverMenu = document.querySelector(".gameover");
 let width = 20;
 let currentIndex = 0;
 let appleIndex = 0;
 let currentSnake = [2, 1, 0];
 let direction = 1;
 let score = 0;
-let speed = 1;
+let speed = 2;
 let intervalTime = 0;
 let interval = 0;
 
@@ -33,10 +33,13 @@ function createBoard() {
 }
 
 // Start of the game
+
 function startGame() {
   let squares = document.querySelectorAll(".grid div");
   randomApple(squares);
+
   //random apple
+
   direction = 1;
   scoreDisplay.innerHTML = score;
   intervalTime = 500;
@@ -48,7 +51,7 @@ function startGame() {
 function moveOutcome() {
   let squares = document.querySelectorAll(".grid div");
   if (checkForHits(squares)) {
-    alert("Oops!! You hit something");
+    alert("Oops!! it's game Over!");
     popup.style.display = "flex";
     score = 0;
     return clearInterval(interval);
@@ -57,11 +60,33 @@ function moveOutcome() {
   }
 }
 
+function setState(state) {
+  gameState = state;
+  if (state === "gameover") {
+      gameOverTune.play()
+      gameOverMenu.style.visibility = "visible";
+  } else if (state === "play") {
+      gameOverMenu.style.visibility = "hidden";
+  } if (state === "start") {
+startMenu.style.visibility = "visible"
+  } else if (state !== "start") {
+      startMenu.style.visibility = "hidden"
+  }
+}
+
+
+
+
+
+
+
 function moveSnake(squares) {
   let tail = currentSnake.pop();
   squares[tail].classList.remove("snake");
   currentSnake.unshift(currentSnake[0] + direction);
+
   //movement ends here
+
   eatApple(squares, tail);
   squares[currentSnake[0]].classList.add("snake");
 }
@@ -81,6 +106,7 @@ function checkForHits(squares) {
 }
 
 // eating the food provided
+
 function eatApple(squares, tail) {
   if (squares[currentSnake[0]].classList.contains("apple")) {
     squares[currentSnake[0]].classList.remove("apple");
@@ -90,7 +116,7 @@ function eatApple(squares, tail) {
     score++;
     scoreDisplay.textContent = score;
     clearInterval(interval);
-    intervalTime = intervalTime * speed;
+    intervalTime = intervalTime + speed;
     interval = setInterval(moveOutcome, intervalTime);
   }
 }
@@ -106,31 +132,29 @@ function randomApple(squares) {
 
 function control(e) {
     if(e.keyCode === 39){
-        direction = 1;
-    }else if(e.keyCode ===38){
-        direction = -width;
+        direction = 1;//right
+    }else if(e.keyCode === 38){
+        direction = -width;//Up
     }else if(e.keyCode === 37){
-        direction = -1;
+        direction = -1;//left
     }else if(e.keyCode === 40){
-        direction = width;
+        direction = width;//Down
     }
 
 }
 
 up.addEventListener("click", () => (direction = -width));
-bottom.addEventListener("click", () => (direction = +width));
+bottom.addEventListener("click", () => (direction = width));
 left.addEventListener("click", () => (direction = -1));
 right.addEventListener("click", () => (direction = 1));
 
-function replay(){
-     
-    gameBoard.innerHTML = "";
-    score = 0;
-    snakeMove();
-    popup.style.display ="none";
-    
-
+function replay() {
+  grid.innerHTML = "";
+  createBoard();
+  startGame();
+  popup.style.display = "none";
 }
+
 document.onkeyup = (e) => control(e);
 
 
