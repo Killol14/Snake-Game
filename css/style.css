@@ -104,7 +104,8 @@ transition: 0.2s;
 h1 {
     text-align: center;
     color: orangered;
-    font-size: 3.2rem;
+    font-size: 5.2rem;
+    margin-bottom: 10px;
 }
 h3 {
     text-align: center;
@@ -135,13 +136,14 @@ h2{
     
 }
 .container {
-    height: 120vh;
+    height: auto;
     width: 100%;
     background-color:black;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding-bottom: 75%;
 
 }
 .content{
@@ -205,6 +207,7 @@ div.score{
 }
 div.button{
     margin-top: 50px;
+ 
 }
 
 .up {
@@ -274,9 +277,6 @@ div.button{
     background:red;
     border-radius: 100%;
 
-}
-.empty{
-    background-color: black;
 }
 
 @media (max-width: 780px) {
