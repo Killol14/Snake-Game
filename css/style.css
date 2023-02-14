@@ -12,57 +12,33 @@ body {
     height :100vh;
     background-color: black;
     background-image: url(images/snakebody.png);
-    
+}
 
-}
-nav{
-    width: 100%;
-    height: 75px;
-    line-height: 75px;
-    padding: 0px 100px;
-    position: fixed;
+.navbar {
     background : linear-gradient(orange,green);
-}
-nav .logo {
-    font-size: 30px;
-    font-weight: bold;
-    float: left;
-    color: black;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    cursor: pointer;
 }
 nav ul{
     float: right;
 }
-nav li{
-    display: inline-block;
-    list-style: none;
+.navbar a.navbar-brand{
+    color: orangered;
+    font-size: 2.2rem;
+    font-weight: 600;
 }
 
-nav li a{
-    font-size: 18px;
-    text-transform: uppercase;
-    padding: 0px 30px;
-    color: black;
-    text-decoration: none;
+.banner{
+  position:relative;
+  width: 90%;
+  margin: 0 auto;
+
 }
-nav li a:hover{
-    color:orange;
-    transition: all 0.4s ease 0s;
+.heading{
+    position: absolute;
+    text-align: center;
+    bottom: 60%;
+    left: 10%;
 }
-nav .logo:hover{
-    color:orange;
-    transition: all 0.4s ease 0s;
-}
-main{
-    height: calc(100vh - 60px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-main p{
+.banner p{
     width: 700px;
     height: 80px;
     line-height: 80px;
@@ -71,7 +47,7 @@ main p{
     background-color:orange;
     border-radius: 20px;
 }
-main button{
+.banner button{
     width: 150px;
     height: 60px;
     border: none;
@@ -84,22 +60,30 @@ main button{
     cursor: pointer;
     display: inline-block;
     background : linear-gradient(orange,green);
+    position: relative;
+    bottom: 40%;
+    left: 30%;
 }
-main button:hover{
+.banner button:hover{
 color: orange;
 transform: translateY(5px);
 transition: 0.2s;
 }
-.content-items img {
+img {
     width: 100%;
-    height: 100vh;
+    height: 75%;
     background-size: cover;
-    margin-top: 80px;
-
+    margin-top: 60px;
 }
 
 
 /* snake.html */
+.color{
+    color: orangered;
+    font-size: 2.2rem;
+    margin:50px;
+    
+}
 
 h1 {
     text-align: center;
