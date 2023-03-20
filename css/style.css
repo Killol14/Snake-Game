@@ -32,21 +32,14 @@ nav ul{
   margin: 0 auto;
 
 }
-.heading{
-    position: absolute;
+.heading {
+    color: orangered;
+    font-size: 4.4rem;
     text-align: center;
-    bottom: 60%;
-    left: 10%;
+    align-items: center;
+    margin-top: 50px;
 }
-.banner p{
-    width: 700px;
-    height: 80px;
-    line-height: 80px;
-    text-align: center;
-    font-size: 50px;
-    background-color:orange;
-    border-radius: 20px;
-}
+
 .banner button{
     width: 150px;
     height: 60px;
@@ -54,27 +47,26 @@ nav ul{
     outline: none;
     border-radius: 10px;
     font-size: 5px;
-    margin-top: 30px;
     font-size: 30px;
-    color:black;
     cursor: pointer;
     display: inline-block;
     background : linear-gradient(orange,green);
     position: relative;
-    bottom: 40%;
+    bottom: 55%;
     left: 30%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 50px;
+    
+    
 }
 .banner button:hover{
 color: orange;
 transform: translateY(5px);
 transition: 0.2s;
 }
-img {
-    width: 100%;
-    height: 75%;
-    background-size: cover;
-    margin-top: 60px;
-}
+
 
 
 /* snake.html */
@@ -262,10 +254,3 @@ div.button{
     border-radius: 100%;
 
 }
-
-@media (max-width: 780px) {
-    p i, h3 {
-      font-size: 0.2em;
-      color: transparent;
-    }
-  }
