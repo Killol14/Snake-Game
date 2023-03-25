@@ -8,66 +8,6 @@ body {
     background-size: cover;
     height: 100vh;
 }
-#classic{
-    height :100vh;
-    background-color: black;
-    background-image: url(images/snakebody.png);
-}
-
-.navbar {
-    background : linear-gradient(orange,green);
-}
-nav ul{
-    float: right;
-}
-.navbar a.navbar-brand{
-    color: orangered;
-    font-size: 2.2rem;
-    font-weight: 600;
-}
-
-.banner{
-  position:relative;
-  width: 90%;
-  margin: 0 auto;
-
-}
-.heading {
-    color: orangered;
-    font-size: 4.4rem;
-    text-align: center;
-    align-items: center;
-    margin-top: 50px;
-}
-
-.banner button{
-    width: 150px;
-    height: 60px;
-    border: none;
-    outline: none;
-    border-radius: 10px;
-    font-size: 5px;
-    font-size: 30px;
-    cursor: pointer;
-    display: inline-block;
-    background : linear-gradient(orange,green);
-    position: relative;
-    bottom: 55%;
-    left: 30%;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin: 50px;
-    
-    
-}
-.banner button:hover{
-color: orange;
-transform: translateY(5px);
-transition: 0.2s;
-}
-
-
 
 /* snake.html */
 .color{
@@ -253,4 +193,12 @@ div.button{
     background:red;
     border-radius: 100%;
 
+}
+@media (max-width: 792px) {
+    p i{
+        display: none;
+    }
+    h3 i{
+        display: none;
+    }
 }
